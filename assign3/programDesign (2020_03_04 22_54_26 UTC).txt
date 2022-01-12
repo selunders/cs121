@@ -1,0 +1,60 @@
+Program Design
+
+
+/* programDesign.txt
+*
+* CS 121.Bolden.....gcc version 9.2.1 20191008 (Ubuntu 9.2.1-9ubuntu2).....Seth Lunders
+* 3/9/20..MSI Apache Pro with Intel i7 7th Gen CPU...lund4272@vandals.uidaho.edu
+*
+* The program will take in a maze data file and output a path to the exit
+*
+* ---------------------------------------------------------------------
+*/
+
+Inputs: 
+	Maze file
+Output:
+	Array of path to exit
+Data Structures:
+	Constants:
+		int mazeRows;    // set from the data file
+		int mazeColumns; // set from the data file
+Arrays:
+	char maze[mazeRows][mazeColumns];	// will store an array of chars 
+										// from the data file
+	char mazeSolution[mazeRows][mazeColumns];	// will store the maze 
+												// solution as an array of chars
+Lists:
+	struct qNode // node for the queue
+	{
+		int row;
+		int column;
+		struct qNode* next;
+		qNode(int r, int c) // constructor
+		{
+		// initialize
+		}
+	};
+	typeDef struct qNode* qNodePtr;
+
+	struct queue // a list of qNode objects
+	{
+		qNodePtr start; // To access coordinates: do "qNodePtr n = queueName->start", then
+						// coords can be accessed with n->row and n->column
+		qNodePtr end;
+		Queue(){} // queue constructor: set start and end to NULL
+		void Enqueue(int row, int col){} // adds a coordinate set to the queue
+		nodePtr Dequeue(){}
+	};
+Functions:
+	bool reachedExit(); // checks if the current coordinate is adjacent to the exit.
+void readMaze(); // inputs maze file to maze array
+					 // read chars to the array, and set the current location to the coordinates of S
+	int solveMaze();// starting at the current coordinates,
+		check if the current cell is adjacent to the exit ( if( reachedExit() ) )
+			if so, mark current cell as visited in the mazeSolution array
+			return 0; // meaning success
+		mark the current cell as visited in the mazeSolution array
+		if the queue is empty, return 1
+		if the north, south, east, or west cells are unvisited, add them to the queue
+		make queue->start the current cell, then dequeue the first qNode
